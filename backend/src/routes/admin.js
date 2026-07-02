@@ -3,7 +3,8 @@ const auth = require('../middleware/auth');
 const roleCheck = require('../middleware/roleCheck');
 const adminController = require('../controllers/adminController');
 const { body } = require('express-validator');
-const validate = require('../validators/validate');
+const path = require('path');
+const validate = require(path.join(__dirname, '..', 'validators', 'validate'));
 
 const router = express.Router();
 router.use(auth);
@@ -11,8 +12,9 @@ router.use(roleCheck('admin'));
 
 router.get('/stats', adminController.getDashboardStats);
 router.get('/users', adminController.listUsers);
+
 router.post('/users', validate([
-    body('name').isLength({ min: 20, max: 60 }),
+    body('name').isLength({ min: 5, max: 20 }),
     body('email').isEmail(),
     body('password').matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,16})/),
     body('address').isLength({ max: 400 }),

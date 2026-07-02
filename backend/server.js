@@ -1,6 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+const authRoutes = require('./src/routes/auth');
+const adminRoutes = require('./src/routes/admin');
+const storeRoutes = require('./src/routes/stores');
+const ownerRoutes = require('./src/routes/owner');
 
 const app = express();
 
@@ -8,6 +12,7 @@ const app = express();
 app.use(cors({
     origin: [
         'https://store-rating-app-iota-seven.vercel.app',
+        'https://store-rating-frontend.vercel.app',
         'http://localhost:5173',
         'http://localhost:3000'
     ],
@@ -18,12 +23,7 @@ app.use(cors({
 
 app.use(express.json());
 
-// ============ Routes (Uncomment करा) ============
-const authRoutes = require('./src/routes/auth');
-const adminRoutes = require('./src/routes/admin');
-const storeRoutes = require('./src/routes/stores');
-const ownerRoutes = require('./src/routes/owner');
-
+// ============ Routes ============
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/stores', storeRoutes);

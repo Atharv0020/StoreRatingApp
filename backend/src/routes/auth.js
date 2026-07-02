@@ -2,7 +2,10 @@ const express = require('express');
 const { register, login, changePassword } = require('../controllers/authController');
 const auth = require('../middleware/auth');
 const { body } = require('express-validator');
-const validate = require('../validators/validate');
+const path = require('path');
+
+// ============ Fixed Path for Validator ============
+const validate = require(path.join(__dirname, '..', 'validators', 'validate'));
 
 const router = express.Router();
 
