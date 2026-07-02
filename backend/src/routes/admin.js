@@ -4,6 +4,8 @@ const roleCheck = require('../middleware/roleCheck');
 const adminController = require('../controllers/adminController');
 const { body } = require('express-validator');
 const path = require('path');
+
+// ============ Fixed Path for Validator ============
 const validate = require(path.join(__dirname, '..', 'validators', 'validate'));
 
 const router = express.Router();
